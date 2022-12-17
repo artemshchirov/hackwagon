@@ -6,6 +6,7 @@
 :root {
   --primary: rgb(107 114 128);
   --secondary: white;
+  color: var(--secondary);
 }
 
 *::-webkit-scrollbar {

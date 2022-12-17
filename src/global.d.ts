@@ -1,0 +1,1 @@
+declare module '../src/components/ui/FileUploadButton.jsx';

@@ -1,13 +1,85 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 
 import Page from '../../layouts/Page';
+import Container from '../../components/Container';
+import { Button } from 'primereact/button';
+import { FileUpload } from 'primereact/fileupload';
 
 const Home: FC = () => {
+  // TODO: change any
+  const toast: any = useRef(null);
+
+  const onBasicUpload = () => {
+    console.log('toast1: ', toast);
+
+    toast.current.show({
+      severity: 'info',
+      summary: 'Success',
+      detail: 'File Uploaded with Basic Mode',
+    });
+  };
+
+  const onBasicUploadAuto = () => {
+    console.log('toast2: ', toast);
+
+    toast.current.show({
+      severity: 'info',
+      summary: 'Success',
+      detail: 'File Uploaded with Auto Mode',
+    });
+  };
   return (
     <Page>
-      <h1 className="self-center mb-10 text-xl font-semibold text-transparent whitespace-nowrap bg-clip-text bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 md:text-3xl">
-        Vite + React.js + TypeScript + Tailwind CSS + Primereact
-      </h1>
+      <Container>
+        <div className="flex flex-row-reverse items-center justify-end m-6 ">
+          <p className="w-2/3 ml-3 no-line-break ">
+            Выберите файл для анализа исторических данных
+          </p>
+          <FileUpload
+            mode="basic"
+            name="demo[]"
+            // url="https://primefaces.org/primereact/showcase/upload.php"
+            accept="image/*"
+            maxFileSize={1000000}
+            onUpload={onBasicUpload}
+            auto
+            chooseLabel="Обзор"
+          />
+        </div>
+
+        <div className="flex flex-row-reverse items-center justify-end m-6">
+          <p className="ml-3">
+            Выберите файл с перевозками которым необходим прогноз
+          </p>
+          <FileUpload
+            mode="basic"
+            name="demo[]"
+            // url="https://primefaces.org/primereact/showcase/upload.php"
+            accept="image/*"
+            maxFileSize={1000000}
+            onUpload={onBasicUploadAuto}
+            auto
+            chooseLabel="Обзор"
+          />
+        </div>
+
+        <div className="flex flex-row-reverse items-center justify-center m-6">
+          <Button
+            label="Получить прогноз"
+            loading={false}
+            loadingIcon="pi pi-spin pi-sun"
+          />
+        </div>
+
+        <div className="flex flex-row-reverse items-center justify-center m-6">
+          <Button
+            label="predicts.csv"
+            icon="pi pi-download"
+            className="pi-button-sm"
+            disabled
+          />
+        </div>
+      </Container>
     </Page>
   );
 };
