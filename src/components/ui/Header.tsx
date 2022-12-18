@@ -26,7 +26,7 @@ const Header: FC = () => {
             className="h-6 mr-3 sm:h-10"
             alt="DevRel Hackathon Logo"
           />
-          <span className="self-center text-xl font-semibold text-transparent text-white whitespace-nowrap bg-clip-text bg-gradient-to-r">
+          <span className="self-center text-xl font-semibold text-black dark:text-white">
             HackWagon
           </span>
         </CustomLink>

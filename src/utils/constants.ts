@@ -1,4 +1,4 @@
-import photo_0 from '../assets/Artem.jpg';
+import photo_0 from '../assets/cat.png';
 
 export const team = [
   {

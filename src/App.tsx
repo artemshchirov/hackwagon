@@ -2,7 +2,7 @@ import { FC, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Spinner from './components/ui/Spinner';
 
-const Home = lazy(() => import('./pages/Home'));
+const Home = lazy(() => import('./pages/Home/Home'));
 const About = lazy(() => import('./pages/About'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Contact = lazy(() => import('./pages/Contact/Contact'));
