@@ -6,7 +6,9 @@ interface ContainerProps {
 
 const Container: FC<ContainerProps> = ({ children }) => {
   return (
-    <div className="p-10 text-black bg-white w-max h-max ">{children}</div>
+    <div className="w-full p-6 text-black bg-white lg:p-10 h-max ">
+      {children}
+    </div>
   );
 };
 
