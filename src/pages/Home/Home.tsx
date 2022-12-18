@@ -57,8 +57,6 @@ const Home: FC = () => {
   const onSubmit = (evt) => {
     evt.preventDefault();
 
-    console.log(date?.toLocaleString());
-
     const result = {
       st_code_snd: destinationId,
       st_code_rsv: arrivalId,
@@ -82,7 +80,7 @@ const Home: FC = () => {
       rsv_dp_id: regionReceiverId,
     };
 
-    console.log('result: ', result);
+    console.log('forms data: ', result);
 
     const url = 'http://44.204.155.19:8000/predict/';
     const requestOptions = {

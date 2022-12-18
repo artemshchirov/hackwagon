@@ -8,7 +8,7 @@ import { team } from '../../utils/constants';
 const Contact: FC = () => {
   return (
     <Page>
-      <Section className="text-white rounded-lg overflow-hidden dark:bg-gray-800 dark:text-gray-100">
+      <Section className="overflow-hidden text-white rounded-lg dark:bg-gray-800 dark:text-gray-100">
         <div className="container flex flex-col items-center justify-center py-4 mx-auto sm:p-5">
           <p className="p-2 text-sm font-medium tracking-wider text-center uppercase">
             Development team
