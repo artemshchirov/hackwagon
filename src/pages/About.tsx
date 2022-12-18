@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import Page from '../../layouts/Page';
+import Page from '../layouts/Page';
 
-import CustomLink from '../../components/CustomLink';
+import CustomLink from '../components/CustomLink';
 
 const About: FC = () => {
   return (

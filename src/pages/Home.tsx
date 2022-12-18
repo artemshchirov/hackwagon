@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 
-import Page from '../../layouts/Page';
-import Container from '../../components/Container';
+import Page from '../layouts/Page';
+import Container from '../components/Container';
 
 import { Calendar, CalendarValueType } from 'primereact/calendar';
+import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
@@ -65,13 +66,16 @@ const Home: FC = () => {
   const [distance, setDistance] = useState<number | null>(null);
   const [date, setDate] = useState<CalendarValueType>(null);
 
-  const [trainType, setTrainType] = useState(null);
-  const [propertyType, setPropertyType] = useState(null);
+  // TODO: change any
+  const [trainType, setTrainType] = useState<any>({});
+  const [propertyType, setPropertyType] = useState<any>({});
 
-  const [isLoad, setIsLoad] = useState(null);
+  // TODO: change any
+  const [isLoad, setIsLoad] = useState<any>({});
   const [cargoId, setCargoId] = useState<number | null>(null);
 
-  const [route, setRoute] = useState(null);
+  // TODO: change any
+  const [route, setRoute] = useState<any>({});
   const [commonChId, setCommonChId] = useState<number | null>(null);
 
   const [senderId, setSenderId] = useState<number | null>(null);
@@ -83,20 +87,62 @@ const Home: FC = () => {
   const [regionSenderId, setRegionSenderId] = useState<number | null>(null);
   const [regionReceiverId, setRegionReceiverId] = useState<number | null>(null);
 
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+
+    const res = {
+      st_code_snd: destinationId,
+      st_code_rsv: arrivalId,
+      // date_depart_year: 2022,
+      // date_depart_month: 12,
+      // date_depart_week: 4,
+      // date_depart_day: 1,
+      // date_depart_hour: 0,
+      fr_id: cargoId,
+      route_type: Number(route?.name),
+      is_load: isLoad?.name === 'Груженый' ? 1 : 0,
+      rod: Number(trainType?.name),
+      common_ch: commonChId,
+      vidsobst: Number(propertyType?.name),
+      distance: distance,
+      snd_org_id: senderId,
+      rsv_org_id: receiverId,
+      snd_roadid: roadSenderId,
+      rsv_roadid: roadReceiverId,
+      snd_dp_id: regionSenderId,
+      rsv_dp_id: regionReceiverId,
+    };
+
+    const url = 'http://44.204.155.19:8000/predict/';
+    // TODO: change any
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(res),
+    };
+    fetch(url, requestOptions)
+      // .then((res) => res.json())
+      .then((response) => {
+        console.log('Submitted successfully, res.body', response);
+      })
+      .catch((error) => console.log('Form submit error', error));
+  };
+
   return (
     <Page>
       <Container>
         <div className="card">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 p-fluid">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 p-fluid">
             <div className="field col-12 md:col-3">
               <span className="p-float-label">
                 <InputNumber
                   inputId="inputnumber"
                   value={destinationId}
                   onChange={(e) => setDestinationId(e.value)}
-                  required
                 />
-                <label htmlFor="inputnumber">ID станции отправления</label>
+                <label htmlFor="inputnumber">ID станции отправления*</label>
               </span>
             </div>
 
@@ -107,7 +153,7 @@ const Home: FC = () => {
                   value={arrivalId}
                   onChange={(e) => setArrivalId(e.value)}
                 />
-                <label htmlFor="inputnumber">ID станции прибытия</label>
+                <label htmlFor="inputnumber">ID станции прибытия*</label>
               </span>
             </div>
 
@@ -119,7 +165,7 @@ const Home: FC = () => {
                   onChange={(e) => setDistance(e.value)}
                   suffix=" км"
                 />
-                <label htmlFor="inputnumber">Дистанция</label>
+                <label htmlFor="inputnumber">Дистанция*</label>
               </span>
             </div>
 
@@ -276,9 +322,14 @@ const Home: FC = () => {
               </span>
             </div>
           </div>
-        </div>
-        <div className="w-1/3 mt-8 mx-auto">
-          <Button className="w-full" label="Submit" loading />
+          <div className="w-1/4 mt-6 lg:mt-10 mx-auto">
+            <Button
+              className="w-full"
+              label="Submit"
+              onClick={(evt) => onSubmit(evt)}
+              loading={false}
+            />
+          </div>
         </div>
       </Container>
     </Page>

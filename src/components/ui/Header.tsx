@@ -15,7 +15,7 @@ const Header: FC = () => {
 
   // TODO: refactor burger menu
   return (
-    <header className="w-full p-4 mb-5 border-gray-200 bg-gray-50 dark:bg-gray-800 md:px-6 dark:border-gray-700">
+    <header className="w-full p-4 border-gray-200 bg-gray-50 dark:bg-gray-800 md:px-6 dark:border-gray-700">
       <div className="container flex flex-wrap items-center justify-between min-w-full">
         <CustomLink
           href="https://github.com/artemshchirov/web-starter"
